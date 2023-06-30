@@ -2,16 +2,25 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use function Symfony\Component\String\u;
 
-class VinylController
+class VinylController extends AbstractController
 {
     #[Route('/')]
     public function homepage(): Response
     {
-        return new Response('Title: PB and Jams');
+        $tracks = [
+            ['song' => 'Waterfalls', 'artist' => 'TLC'],
+            ['song' => 'Kiss from a rose', 'artist' => 'Seal']
+        ];
+
+        return $this->render('vinyl/homepage.html.twig', [
+            'title' => 'PB & Jams',
+            'tracks' => $tracks,
+        ]);
     }
 
     #[Route('/browse/{slug}')]
